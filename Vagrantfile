@@ -81,26 +81,21 @@ gem install rake
 
 #-----------------------------------------
 
-# setup development: GIT, VIM/GVIM, ...
-apt-get install -y git vim vim-gnome
-
-# install powerline fonts
-cd /usr/share/fonts/ && git clone https://github.com/scotu/ubuntu-mono-powerline.git
-cd /home/vagrant
-fc-cache -vf
-
-npm install -g powerline
-sudo -E -u vagrant cat <<'BASHRC' >> /home/vagrant/.bashrc
-function _update_ps1() {
-   export PS1="$(powerline $? --shell bash --depth 4)"
-}
-export PROMPT_COMMAND="_update_ps1"
-BASHRC
-
-
 # start desktop (using autologin for user "vagrant")
 echo "autologin-user=vagrant" | tee -a /etc/lightdm/lightdm.conf
 service lightdm restart
+
+# setup development: GIT, VIM/GVIM, ...
+apt-get install -y git vim vim-gnome
+
+# install dotfiles
+sudo -u vagrant mkdir code
+cd code
+sudo -E -u vagrant git clone https://github.com/StefanScherer/dotfiles.git
+cd dotfiles
+sudo -E -u vagrant ./sync.sh -f
+cd ~
+
 
 # install Chromium  browser
 apt-get install -y chromium-browser
@@ -133,7 +128,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :virtualbox do |vb|
     vb.gui = true
     # Use VBoxManage to customize the VM. For example to change memory:
-    vb.customize ["modifyvm", :id, "--memory", "1024", "--cpus", "1"]
+    vb.customize ["modifyvm", :id, "--memory", "1280", "--cpus", "2"]
     vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
   end
 
