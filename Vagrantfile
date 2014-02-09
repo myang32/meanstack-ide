@@ -91,11 +91,8 @@ apt-get install -y git vim vim-gnome
 
 # install dotfiles
 sudo -u vagrant mkdir code
-cd code
-sudo -E -u vagrant git clone https://github.com/StefanScherer/dotfiles.git
-cd dotfiles
-sudo -E -u vagrant ./sync.sh -f
-cd ~
+sudo -E -u vagrant git clone https://github.com/StefanScherer/dotfiles.git /home/vagrant/code/dotfiles
+sudo -E -H -u vagrant code/dotfiles/sync.sh -f
 
 
 # install Chromium  browser
