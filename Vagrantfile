@@ -94,7 +94,6 @@ sudo -u vagrant mkdir code
 sudo -E -u vagrant git clone https://github.com/StefanScherer/dotfiles.git /home/vagrant/code/dotfiles
 sudo -E -H -u vagrant code/dotfiles/sync.sh -f
 
-
 # install Chromium  browser
 apt-get install -y chromium-browser
 
