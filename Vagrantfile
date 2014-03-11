@@ -118,7 +118,8 @@ favorites=['nautilus-home.desktop', \
            'gvim.desktop', \
            'wireshark.desktop', \
            'ubuntu-software-center.desktop', \
-           'gnome-control-center.desktop' \
+           'gnome-control-center.desktop', \
+           'gnome-system-monitor' \
 ]
 GSCHEMA
 sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
@@ -155,7 +156,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.hostname = "meanstack-ide-precise64"
   config.vm.box = "precise64"
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
-  
+
+  config.vm.network :private_network, ip: "192.168.33.115", gateway: "192.168.33.1"
+
   if ENV['_system_type'] == 'Darwin'
     # Mac OSX Host (don't use restricted TCP ports)
     config.vm.network :forwarded_port, :host => 8888, :guest => 8888
@@ -175,7 +178,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :virtualbox do |vb|
     vb.gui = true
     # Use VBoxManage to customize the VM. For example to change memory:
-    vb.customize ["modifyvm", :id, "--memory", "1024", "--cpus", "1"]
+    vb.customize ["modifyvm", :id, "--memory", "2048", "--cpus", "2"]
     vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
     vb.customize ["modifyvm", :id, "--vram", "32"]
   end
