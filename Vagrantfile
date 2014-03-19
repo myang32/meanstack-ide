@@ -166,6 +166,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.network :forwarded_port, :host => 6631, :guest => 6631
     config.vm.network :forwarded_port, :host => 5515, :guest => 5515
     config.vm.network :forwarded_port, :host => 9100, :guest => 9100
+    config.vm.network :forwarded_port, :host => 3000, :guest => 3000
   else
     # Windows Host (not a problem to use restricted TCP ports)
     config.vm.network :forwarded_port, :host => 8888, :guest => 8888
@@ -173,6 +174,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.network :forwarded_port, :host => 6631, :guest => 6631
     config.vm.network :forwarded_port, :host => 5515, :guest => 5515
     config.vm.network :forwarded_port, :host => 9100, :guest => 9100
+    config.vm.network :forwarded_port, :host => 3000, :guest => 3000
   end
 
   config.vm.provider :virtualbox do |vb|
