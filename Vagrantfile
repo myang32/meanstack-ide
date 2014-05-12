@@ -159,24 +159,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.network :private_network, ip: "192.168.33.115", gateway: "192.168.33.1"
 
-  if ENV['_system_type'] == 'Darwin'
-    # Mac OSX Host (don't use restricted TCP ports)
-    config.vm.network :forwarded_port, :host => 8888, :guest => 8888
-    config.vm.network :forwarded_port, :host => 4443, :guest => 4443
-    config.vm.network :forwarded_port, :host => 6631, :guest => 6631
-    config.vm.network :forwarded_port, :host => 5515, :guest => 5515
-    config.vm.network :forwarded_port, :host => 9100, :guest => 9100
-    config.vm.network :forwarded_port, :host => 3000, :guest => 3000
-  else
-    # Windows Host (not a problem to use restricted TCP ports)
-    config.vm.network :forwarded_port, :host => 8888, :guest => 8888
-    config.vm.network :forwarded_port, :host => 4443, :guest => 4443
-    config.vm.network :forwarded_port, :host => 6631, :guest => 6631
-    config.vm.network :forwarded_port, :host => 5515, :guest => 5515
-    config.vm.network :forwarded_port, :host => 9100, :guest => 9100
-    config.vm.network :forwarded_port, :host => 3000, :guest => 3000
-  end
-
   config.vm.provider :virtualbox do |vb|
     vb.gui = true
     # Use VBoxManage to customize the VM. For example to change memory:
